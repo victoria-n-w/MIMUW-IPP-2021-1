@@ -5,7 +5,7 @@
 
 typedef struct dynamic_array dynamic_array_t;
 
-dynamic_array_t *new_dynamic_array();
+dynamic_array_t *new_dynamic_array(size_t init_size);
 /**
  * safely destroy dynamic array
  */
@@ -25,4 +25,7 @@ void *dynamic_array_pop(dynamic_array_t *arr);
  */
 void dynamic_array_push(dynamic_array_t *arr, void *element);
 
+void *dynamic_array_get(dynamic_array_t *arr, size_t i);
+
+size_t dynamic_array_get_size(dynamic_array_t *arr);
 #endif

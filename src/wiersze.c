@@ -80,7 +80,7 @@ static void process_data(char *buffer, line_set_t *lines_data, int line_cnt) {
     }
   }
 
-  line_rec_sort(rec);
+  line_rec_commit(rec);
 
   // TODO this function has to free the rec memory
   line_set_insert(lines_data, rec);

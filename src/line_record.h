@@ -34,6 +34,6 @@ void line_rec_insert_word(line_record_t* rec, char* word);
 
 /**
  */
-void line_rec_sort(line_record_t* rec);
+void line_rec_commit(line_record_t* rec);
 
 #endif

@@ -6,14 +6,15 @@
 
 line_record_t* new_line_record() {
   line_record_t* res = safe_malloc(sizeof(line_record_t));
-  res->numbers = new_dynamic_array();
-  res->words = new_dynamic_array();
+  res->numbers = new_dynamic_array(10);
+  res->words = new_dynamic_array(10);
   return res;
 }
 
 void destroy_line_record(line_record_t* rec) {
   if (rec == NULL) return;
 
+  // destroy rec->numbers
   while (1) {
     long double* ptr = dynamic_array_pop(rec->numbers);
     if (ptr == NULL) break;
@@ -22,9 +23,10 @@ void destroy_line_record(line_record_t* rec) {
 
   destroy_dynamic_array(rec->numbers);
 
+  // destroy rec->words
   while (1) {
     char* word_ptr = dynamic_array_pop(rec->words);
-    if (word_ptr == NULL) return;
+    if (word_ptr == NULL) break;
     free(word_ptr);
   }
 
@@ -42,4 +44,11 @@ void line_rec_insert_word(line_record_t* rec, char* word) {
   dynamic_array_push(rec->words, word);
 };
 
-void line_rec_sort(line_record_t* rec){};
+static void rec_sort_numbers(line_record_t* rec) {}
+
+static void rec_sort_words(line_record_t* rec) {}
+
+void line_rec_commit(line_record_t* rec) {
+  rec_sort_numbers(rec);
+  rec_sort_words(rec);
+}
