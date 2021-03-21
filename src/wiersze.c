@@ -71,11 +71,12 @@ static void process_data(char *buffer, line_set_t *lines_data, int line_cnt) {
 
       if (!not_number) {
         line_rec_insert_number(rec, res);
+        free(word);
       } else {
-        line_rec_insert_word(rec, word, lenght);
+        line_rec_insert_word(rec, word);
+        // we dont free word* here,
+        // because line record uses this memory
       }
-
-      free(word);
     }
   }
 

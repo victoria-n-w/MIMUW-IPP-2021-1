@@ -27,9 +27,13 @@ void line_rec_insert_number(line_record_t* rec, long double number);
 /**
  * insert word into line rec
  * its lenght is specified by lenght parameter
+ *
+ * the numbers are not sorted
  */
-void line_rec_insert_word(line_record_t* rec, char* word, size_t length);
+void line_rec_insert_word(line_record_t* rec, char* word);
 
+/**
+ */
 void line_rec_sort(line_record_t* rec);
 
 #endif
