@@ -22,9 +22,13 @@ line_record_t* new_line_record();
  */
 void destroy_line_record(line_record_t* rec);
 
-void line_rec_insert_number(line_record_t* rec, __float128 number);
+void line_rec_insert_number(line_record_t* rec, long double number);
 
-void line_rec_insert_word(line_record_t* rec, char* word);
+/**
+ * insert word into line rec
+ * its lenght is specified by lenght parameter
+ */
+void line_rec_insert_word(line_record_t* rec, char* word, size_t length);
 
 void line_rec_sort(line_record_t* rec);
 

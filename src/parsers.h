@@ -11,6 +11,6 @@
  * sets the value of not_number to true, if the parsed string
  * wasn't number
  */
-__float128 parse_number(char *word, size_t lenght, bool *not_number);
+long double parse_number(char *word, size_t lenght, bool *not_number);
 
 #endif

@@ -6,7 +6,7 @@
 // TODO delete
 #include <stdio.h>
 
-static __float128 parse_long_double(const char *word, bool *not_number) {
+static long double parse_long_double(const char *word, bool *not_number) {
   char *endptr;
   long double res_ld = strtold(word, &endptr);
 
@@ -20,7 +20,7 @@ static __float128 parse_long_double(const char *word, bool *not_number) {
   return 0;
 }
 
-static __float128 parse_regular_number(const char *word, bool *not_number) {
+static long double parse_regular_number(const char *word, bool *not_number) {
   char *endptr;
 
   long long res_ll = strtoll(word, &endptr, 10);
@@ -40,7 +40,7 @@ static __float128 parse_regular_number(const char *word, bool *not_number) {
   return parse_long_double(word, not_number);
 }
 
-static __float128 parse_base(const char *word, bool *not_number, int base) {
+static long double parse_base(const char *word, bool *not_number, int base) {
   char *endptr;
   unsigned long long res = strtoull(word, &endptr, base);
   if (errno == 0 && *endptr == 0) {
@@ -50,7 +50,7 @@ static __float128 parse_base(const char *word, bool *not_number, int base) {
   return 0;
 }
 
-__float128 parse_number(char *word, size_t lenght, bool *not_number) {
+long double parse_number(char *word, size_t lenght, bool *not_number) {
   errno = 0;
   if (lenght < 2) {
     return parse_regular_number(word, not_number);

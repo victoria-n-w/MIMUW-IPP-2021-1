@@ -67,12 +67,12 @@ static void process_data(char *buffer, line_set_t *lines_data, int line_cnt) {
 
       bool not_number = false;
       // TODO add word_lenght
-      __float128 res = parse_number(word, lenght, &not_number);
+      long double res = parse_number(word, lenght, &not_number);
 
       if (!not_number) {
         line_rec_insert_number(rec, res);
       } else {
-        line_rec_insert_word(rec, word);
+        line_rec_insert_word(rec, word, lenght);
       }
 
       free(word);

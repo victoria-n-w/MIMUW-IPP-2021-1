@@ -13,8 +13,8 @@ void destroy_line_record(line_record_t* rec) {
   free(rec);
 }
 
-void line_rec_insert_number(line_record_t* rec, __float128 number){};
+void line_rec_insert_number(line_record_t* rec, long double number){};
 
-void line_rec_insert_word(line_record_t* rec, char* word){};
+void line_rec_insert_word(line_record_t* rec, char* word, size_t lenght){};
 
 void line_rec_sort(line_record_t* rec){};
