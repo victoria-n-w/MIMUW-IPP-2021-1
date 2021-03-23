@@ -63,8 +63,7 @@ long double parse_number(char *word, size_t lenght, bool *not_number) {
   if (word[0] == '0') {
     if (word[1] == 'x') {
       if (lenght == 2) {
-        // "0x" is not a correct number
-        *not_number = true;
+        // "0x" is a correct number
         return 0;
       }
       return parse_base(word, not_number, 16);

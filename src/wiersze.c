@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -73,6 +74,8 @@ static void process_data(char *buffer, line_set_t *lines_data, int line_cnt) {
         line_rec_insert_number(rec, res);
         free(word);
       } else {
+        // set word to lowercase
+        for (char *p = word; *p; ++p) *p = tolower(*p);
         line_rec_insert_word(rec, word);
         // we dont free word* here,
         // because line record uses this memory

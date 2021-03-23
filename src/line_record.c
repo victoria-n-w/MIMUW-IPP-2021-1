@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "safe_funcs.h"
+#include "sort_lex.h"
 #include "sort_nums.h"
 
 line_record_t* new_line_record() {
@@ -52,7 +53,11 @@ static void rec_sort_numbers(line_record_t* rec) {
   rec->numbers = sorted;
 }
 
-static void rec_sort_words(line_record_t* rec) {}
+static void rec_sort_words(line_record_t* rec) {
+  dynamic_array_t* sorted = sort_lex(rec->words);
+  destroy_dynamic_array(rec->words);
+  rec->words = sorted;
+}
 
 void line_rec_commit(line_record_t* rec) {
   rec_sort_numbers(rec);
