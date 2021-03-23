@@ -48,7 +48,7 @@ void line_rec_insert_word(line_record_t* rec, char* word) {
 };
 
 static void rec_sort_numbers(line_record_t* rec) {
-  dynamic_array_t* sorted = sort_numbers(rec->numbers);
+  dynamic_array_t* sorted = sort_numbers(rec->numbers, ld_comparator);
   destroy_dynamic_array(rec->numbers);
   rec->numbers = sorted;
 }

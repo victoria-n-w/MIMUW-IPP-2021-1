@@ -30,7 +30,7 @@ bool valid_line(char *buffer) {
 // processes line
 static void process_data(char *buffer, line_set_t *lines_data, int line_cnt) {
   if (!valid_line(buffer)) {
-    // TODO printf error
+    fprintf(stderr, "ERROR %d\n", line_cnt);
     return;
   }
 
@@ -90,7 +90,7 @@ static void process_data(char *buffer, line_set_t *lines_data, int line_cnt) {
 }
 
 int main() {
-  u_int64_t line_counter = 0;
+  u_int64_t line_counter = 1;
 
   size_t BUFFER_SIZE = 256;
   char *buffer;
