@@ -1,8 +1,10 @@
 #include "line_record.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "safe_funcs.h"
+#include "sort_nums.h"
 
 line_record_t* new_line_record() {
   line_record_t* res = safe_malloc(sizeof(line_record_t));
@@ -44,7 +46,11 @@ void line_rec_insert_word(line_record_t* rec, char* word) {
   dynamic_array_push(rec->words, word);
 };
 
-static void rec_sort_numbers(line_record_t* rec) {}
+static void rec_sort_numbers(line_record_t* rec) {
+  dynamic_array_t* sorted = sort_numbers(rec->numbers);
+  destroy_dynamic_array(rec->numbers);
+  rec->numbers = sorted;
+}
 
 static void rec_sort_words(line_record_t* rec) {}
 

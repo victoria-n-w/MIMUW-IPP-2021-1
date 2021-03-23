@@ -5,7 +5,17 @@
 
 typedef struct dynamic_array dynamic_array_t;
 
+/**
+ * creates empty array (its size is 0)
+ */
 dynamic_array_t *new_dynamic_array(size_t init_size);
+
+/**
+ * creates and returns pointer to new dynamic array of given size
+ * its elements are not initialized
+ */
+dynamic_array_t *new_dynamic_array_of_size(size_t i);
+
 /**
  * safely destroy dynamic array
  */
@@ -28,4 +38,17 @@ void dynamic_array_push(dynamic_array_t *arr, void *element);
 void *dynamic_array_get(dynamic_array_t *arr, size_t i);
 
 size_t dynamic_array_get_size(dynamic_array_t *arr);
+
+void dynamic_array_set(dynamic_array_t *arr, size_t i, void *x);
+
+void dynamic_array_swap(dynamic_array_t *arr, size_t i, size_t j);
+
+/**
+ * removes the first element from the array
+ * returns removed element
+ *
+ * works in O(n), where n is the size of arr
+ */
+void *dynamic_array_pop_front(dynamic_array_t *arr);
+
 #endif

@@ -6,6 +6,8 @@
  * copies arr
  * and sorts numbers inside it
  * returns pointer to the created copy
+ *
+ * uses heap-sort
  */
 dynamic_array_t *sort_numbers(dynamic_array_t *arr);
 
