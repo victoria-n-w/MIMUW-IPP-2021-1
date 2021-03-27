@@ -18,4 +18,10 @@ void line_set_insert(line_set_t *set, line_record_t *rec);
  */
 void destroy_line_set(line_set_t *set);
 
+/**
+ * prints groups of similar lines in the set
+ * takes O(nlogn) time to complete
+ */
+void line_set_to_stdout(line_set_t *set);
+
 #endif

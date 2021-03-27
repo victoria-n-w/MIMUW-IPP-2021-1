@@ -1,14 +1,12 @@
 #ifndef _LINE_RECORD_H
 #define _LINE_RECORD_H
 
+#include <stdbool.h>
 #include <stdlib.h>
 
 #include "dynamic_array.h"
 
-typedef struct line_record {
-  u_int64_t number;
-  dynamic_array_t *words, *numbers;
-} line_record_t;
+typedef struct line_record line_record_t;
 
 /**
  * allocates memory for new line_record
@@ -35,5 +33,15 @@ void line_rec_insert_word(line_record_t* rec, char* word);
 /**
  */
 void line_rec_commit(line_record_t* rec);
+
+/**
+ * returns:
+ *  -1 if a < b
+ *   0 if a == b
+ *   1 if a > b
+ */
+int line_rec_comparator(line_record_t* a, line_record_t* b);
+
+u_int64_t line_rec_get_number(line_record_t* rec);
 
 #endif

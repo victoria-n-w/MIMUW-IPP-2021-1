@@ -46,4 +46,11 @@ void *list_pop_front(list_t *l);
  */
 dynamic_array_t *list_to_dynamic_array(list_t *l, size_t lenght);
 
+/**
+ * return the first element, without removing it
+ */
+void *list_peek(list_t *l);
+
+bool list_is_empty(list_t *l);
+
 #endif

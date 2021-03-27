@@ -1,4 +1,4 @@
-#include "sort_nums.h"
+#include "heap_sort.h"
 
 #include <stdbool.h>
 #include <stdio.h>

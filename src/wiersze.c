@@ -28,14 +28,14 @@ bool valid_line(char *buffer) {
 };
 
 // processes line
-static void process_data(char *buffer, line_set_t *lines_data, int line_cnt) {
+static void process_data(char *buffer, line_set_t *lines_data,
+                         u_int64_t line_cnt) {
   if (!valid_line(buffer)) {
     fprintf(stderr, "ERROR %d\n", line_cnt);
     return;
   }
 
-  line_record_t *rec = new_line_record();
-  rec->number = line_cnt;
+  line_record_t *rec = new_line_record(line_cnt);
 
   size_t word_beggining = 0, word_end = 0;
 
@@ -102,6 +102,7 @@ int main() {
     line_counter += 1;
   }
 
+  line_set_to_stdout(lines_data);
   destroy_line_set(lines_data);
   free(buffer);
 }

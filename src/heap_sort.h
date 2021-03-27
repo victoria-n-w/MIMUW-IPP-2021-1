@@ -1,5 +1,5 @@
-#ifndef _SORT_NUMS_H
-#define _SORT_NUMS_H
+#ifndef _HEAP_SORT_H
+#define _HEAP_SORT_H
 
 #include <stdbool.h>
 

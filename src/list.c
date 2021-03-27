@@ -112,3 +112,10 @@ dynamic_array_t *list_to_dynamic_array(list_t *l, size_t n) {
   destroy_list(l);
   return res;
 }
+
+bool list_is_empty(list_t *l) { return l->first_node == NULL; }
+
+void *list_peek(list_t *l) {
+  if (l == NULL) invalid_list();
+  return l->first_node;
+}

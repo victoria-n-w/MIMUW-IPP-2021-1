@@ -75,6 +75,12 @@ long double parse_number(char *word, size_t lenght, bool *not_number) {
       // "0" is the beginning of an octadecimal numer
       return parse_base(word, not_number, 8);
     }
+  } else if (word[0] == '+') {
+    if (lenght == 1) {
+      *not_number = true;
+      return 0;
+    }
+    return parse_number(word + sizeof(char), lenght - 1, not_number);
   } else {
     return parse_regular_number(word, not_number);
   }

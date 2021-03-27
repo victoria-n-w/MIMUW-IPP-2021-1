@@ -2,15 +2,22 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
+#include "heap_sort.h"
 #include "safe_funcs.h"
 #include "sort_lex.h"
-#include "sort_nums.h"
 
-line_record_t* new_line_record() {
+typedef struct line_record {
+  u_int64_t number;
+  dynamic_array_t *words, *numbers;
+} line_record_t;
+
+line_record_t* new_line_record(int number) {
   line_record_t* res = safe_malloc(sizeof(line_record_t));
   res->numbers = new_dynamic_array(10);
   res->words = new_dynamic_array(10);
+  res->number = number;
   return res;
 }
 
@@ -59,7 +66,56 @@ static void rec_sort_words(line_record_t* rec) {
   rec->words = sorted;
 }
 
+/**
+ * a simple function for debugging purpouses
+ */
+static void line_rec_print_numbers(line_record_t* rec) {
+  size_t n = dynamic_array_get_size(rec->numbers);
+  for (size_t i = 0; i < n; i++)
+    printf("%Lf ", dynamic_array_get(rec->numbers, i));
+  printf("\n");
+}
+
 void line_rec_commit(line_record_t* rec) {
   rec_sort_numbers(rec);
   rec_sort_words(rec);
+}
+
+u_int64_t line_rec_get_number(line_record_t* rec) { return rec->number; }
+
+int line_rec_comparator(line_record_t* a, line_record_t* b) {
+  size_t a_size = dynamic_array_get_size(a->numbers);
+  size_t b_size = dynamic_array_get_size(b->numbers);
+
+  if (a_size < b_size) return -1;
+  if (a_size > b_size) return 1;
+
+  a_size = dynamic_array_get_size(a->words);
+  b_size = dynamic_array_get_size(b->words);
+
+  if (a_size < b_size) return -1;
+  if (a_size > b_size) return 1;
+
+  a_size = dynamic_array_get_size(a->numbers);
+
+  long double a_num, b_num;
+
+  for (size_t i = 0; i < a_size; ++i) {
+    a_num = *(long double*)dynamic_array_get(a->numbers, i);
+    b_num = *(long double*)dynamic_array_get(b->numbers, i);
+
+    if (a_num < b_num) return -1;
+    if (a_num > b_num) return 1;
+  }
+
+  a_size = dynamic_array_get_size(a->words);
+
+  for (size_t i = 0; i < a_size; ++i) {
+    int res =
+        strcmp(dynamic_array_get(a->words, i), dynamic_array_get(b->words, i));
+
+    if (res != 0) return res;
+  }
+
+  return 0;
 }
