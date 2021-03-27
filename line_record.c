@@ -105,7 +105,8 @@ int line_rec_comparator(line_record_t* a, line_record_t* b) {
     int res =
         strcmp(dynamic_array_get(a->words, i), dynamic_array_get(b->words, i));
 
-    if (res != 0) return res;
+    if (res < 0) return -1;
+    if (res > 0) return 1;
   }
 
   return 0;

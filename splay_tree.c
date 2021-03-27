@@ -1,6 +1,7 @@
 #include "splay_tree.h"
 
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "safe_funcs.h"
@@ -111,10 +112,39 @@ static node_t *search_and_insert(splay_tree_t *tree, void *element) {
   }
 }
 
+static void change_father(node_t *x, node_t *father) {
+  if (x == NULL) return;
+  x->father = father;
+}
+
+static int which_son_is_it(node_t *son) {
+  if (son->father == NULL) return 0;
+  if (son == son->father->left) return -1;
+  if (son == son->father->right) return 1;
+  return 0;
+}
+
+// swaps node a with node b, in a's father
+static void change_son(node_t *a, node_t *b) {
+  switch (which_son_is_it(a)) {
+    case -1:
+      a->father->left = b;
+      break;
+
+    case 1:
+      a->father->right = b;
+      break;
+  }
+}
+
 static void rotate_right(node_t *x) {
   node_t *y = x->father;
   y->left = x->right;
   x->right = y;
+
+  change_father(y->left, y);
+  change_son(x->father, x);
+
   x->father = y->father;
   y->father = x;
 }
@@ -123,6 +153,9 @@ static void rotate_left(node_t *x) {
   node_t *y = x->father;
   y->right = x->left;
   x->left = y;
+
+  change_father(y->right, y);
+  change_son(y, x);
 
   x->father = y->father;
   y->father = x;

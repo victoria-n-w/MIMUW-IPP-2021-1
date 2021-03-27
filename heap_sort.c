@@ -46,6 +46,7 @@ static void heap_down(dynamic_array_t *arr, size_t n,
 
     if (largest != k) {
       dynamic_array_swap(arr, largest, k);
+      k = largest;
     } else {
       break;
     }

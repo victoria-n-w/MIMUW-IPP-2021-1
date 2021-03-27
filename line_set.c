@@ -89,11 +89,16 @@ void line_set_to_stdout(line_set_t *set) {
   uint64_t *number;
 
   for (size_t i = 0; i < n; i++) {
-    while ((number = list_pop_front(dynamic_array_get(sorted, i))) != NULL) {
-      printf("%lu ", *number);
-      free(number);
+    while (1) {
+      number = list_pop_front(dynamic_array_get(sorted, i));
+      printf("%lu", *number);
+      if (!list_is_empty(dynamic_array_get(sorted, i))) {
+        printf(" ");
+      } else {
+        printf("\n");
+        break;
+      }
     }
-    printf("\n");
   }
 
   destroy_dynamic_array(sorted);

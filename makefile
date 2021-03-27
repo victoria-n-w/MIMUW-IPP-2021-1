@@ -1,4 +1,4 @@
-CFLAGS = -c -Wall -Wextra -Werror -std=c11 -O2
+CFLAGS = -c -g -Wall -Wextra -Werror -std=c11 -O2
 CC = gcc
 OBJ = wiersze.o dynamic_array.o heap_sort.o \
 	line_record.o line_set.o list.o parsers.o \

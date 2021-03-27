@@ -105,7 +105,7 @@ void dynamic_array_swap(dynamic_array_t *arr, size_t i, size_t j) {
 
 void *dynamic_array_pop_front(dynamic_array_t *arr) {
   void *temp = arr->arr[0];
-  for (size_t i = 0; i < arr->size - 1; i++) {
+  for (size_t i = 0; i < arr->size - 1; ++i) {
     arr->arr[i] = arr->arr[i + 1];
   }
   arr->arr[arr->size - 1] = temp;
