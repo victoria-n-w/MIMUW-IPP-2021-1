@@ -117,5 +117,5 @@ bool list_is_empty(list_t *l) { return l->first_node == NULL; }
 
 void *list_peek(list_t *l) {
   if (l == NULL) invalid_list();
-  return l->first_node;
+  return l->first_node->element;
 }

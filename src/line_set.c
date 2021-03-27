@@ -70,7 +70,8 @@ void line_set_insert(line_set_t *set, line_record_t *rec) {
 }
 
 static bool number_list_comparator(void *a, void *b) {
-  return *(int *)list_peek((list_t *)a) < *(int *)list_peek((list_t *)b);
+  return *(u_int64_t *)list_peek((list_t *)a) <
+         *(u_int64_t *)list_peek((list_t *)b);
 }
 
 static void *mapping_func(void *element) {

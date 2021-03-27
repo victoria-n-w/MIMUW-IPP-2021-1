@@ -21,6 +21,10 @@ void destroy_line_set(line_set_t *set);
 /**
  * prints groups of similar lines in the set
  * takes O(nlogn) time to complete
+ *
+ * destroys inner set data in the process,
+ * though destroy_line_set is required to be called afterwards
+ * to avoid memory leaks
  */
 void line_set_to_stdout(line_set_t *set);
 

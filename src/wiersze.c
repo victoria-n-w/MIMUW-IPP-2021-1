@@ -61,7 +61,7 @@ static void process_data(char *buffer, line_set_t *lines_data,
 
       size_t counter = 0;
       while (word_beggining != word_end) {
-        word[counter++] = buffer[word_beggining++];
+        word[counter++] = tolower(buffer[word_beggining++]);
       }
       // terminate word with NULL;
       word[counter] = 0;
@@ -75,7 +75,6 @@ static void process_data(char *buffer, line_set_t *lines_data,
         free(word);
       } else {
         // set word to lowercase
-        for (char *p = word; *p; ++p) *p = tolower(*p);
         line_rec_insert_word(rec, word);
         // we dont free word* here,
         // because line record uses this memory
