@@ -1,1 +1,5 @@
 src/wiersze
+tests
+*.o
+similar_lines
+tests/*

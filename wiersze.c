@@ -1,3 +1,5 @@
+#define _GNU_SOURCE
+
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -29,9 +31,9 @@ bool valid_line(char *buffer) {
 
 // processes line
 static void process_data(char *buffer, line_set_t *lines_data,
-                         u_int64_t line_cnt) {
+                         uint64_t line_cnt) {
   if (!valid_line(buffer)) {
-    fprintf(stderr, "ERROR %d\n", line_cnt);
+    fprintf(stderr, "ERROR %lu\n", line_cnt);
     return;
   }
 
@@ -89,7 +91,7 @@ static void process_data(char *buffer, line_set_t *lines_data,
 }
 
 int main() {
-  u_int64_t line_counter = 1;
+  uint64_t line_counter = 1;
 
   size_t BUFFER_SIZE = 256;
   char *buffer;

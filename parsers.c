@@ -56,10 +56,6 @@ long double parse_number(char *word, size_t lenght, bool *not_number) {
     return parse_regular_number(word, not_number);
   }
 
-  char *end_character;
-
-  unsigned long long res;
-
   if (word[0] == '0') {
     if (word[1] == 'x') {
       if (lenght == 2) {

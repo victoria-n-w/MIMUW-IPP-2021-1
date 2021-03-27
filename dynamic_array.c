@@ -25,9 +25,10 @@ dynamic_array_t *new_dynamic_array_of_size(size_t size) {
 }
 
 static void invalid_element(dynamic_array_t *arr, size_t i) {
-  fprintf(stderr,
-          "Cannot access element in array of size: %d; requested element: %d\n",
-          arr->size, i);
+  fprintf(
+      stderr,
+      "Cannot access element in array of size: %lu; requested element: %lu\n",
+      arr->size, i);
   exit(1);
 }
 

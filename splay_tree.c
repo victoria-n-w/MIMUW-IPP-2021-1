@@ -67,7 +67,7 @@ dynamic_array_t *splay_tree_map(splay_tree_t *tree, void *(*func)(void *)) {
 
   node_t *node;
 
-  while (node = dynamic_array_pop(stack)) {
+  while ((node = dynamic_array_pop(stack)) != NULL) {
     dynamic_array_push(res, func(node->element));
     if (node->left) dynamic_array_push(stack, node->left);
     if (node->right) dynamic_array_push(stack, node->right);

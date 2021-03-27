@@ -1,5 +1,6 @@
 #include "line_record.h"
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,7 +10,7 @@
 #include "sort_lex.h"
 
 typedef struct line_record {
-  u_int64_t number;
+  uint64_t number;
   dynamic_array_t *words, *numbers;
 } line_record_t;
 
@@ -66,22 +67,12 @@ static void rec_sort_words(line_record_t* rec) {
   rec->words = sorted;
 }
 
-/**
- * a simple function for debugging purpouses
- */
-static void line_rec_print_numbers(line_record_t* rec) {
-  size_t n = dynamic_array_get_size(rec->numbers);
-  for (size_t i = 0; i < n; i++)
-    printf("%Lf ", dynamic_array_get(rec->numbers, i));
-  printf("\n");
-}
-
 void line_rec_commit(line_record_t* rec) {
   rec_sort_numbers(rec);
   rec_sort_words(rec);
 }
 
-u_int64_t line_rec_get_number(line_record_t* rec) { return rec->number; }
+uint64_t line_rec_get_number(line_record_t* rec) { return rec->number; }
 
 int line_rec_comparator(line_record_t* a, line_record_t* b) {
   size_t a_size = dynamic_array_get_size(a->numbers);

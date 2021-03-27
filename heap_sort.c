@@ -30,7 +30,7 @@ static void build_heap(dynamic_array_t *arr, dynamic_array_t *res, size_t n,
 static void heap_down(dynamic_array_t *arr, size_t n,
                       bool (*cmp)(void *, void *)) {
   // largest is the index, at which the greatest of three compared elements is
-  size_t largest, l, r, k = 1;
+  size_t largest, k = 1;
 
   while (1) {
     largest = k;

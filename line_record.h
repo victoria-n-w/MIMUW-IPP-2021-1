@@ -2,6 +2,7 @@
 #define _LINE_RECORD_H
 
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 #include "dynamic_array.h"
@@ -42,6 +43,6 @@ void line_rec_commit(line_record_t* rec);
  */
 int line_rec_comparator(line_record_t* a, line_record_t* b);
 
-u_int64_t line_rec_get_number(line_record_t* rec);
+uint64_t line_rec_get_number(line_record_t* rec);
 
 #endif

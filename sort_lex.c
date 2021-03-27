@@ -39,7 +39,7 @@ static list_t *do_the_sorting(list_t **words_of_lenght, size_t longest) {
 
   // initializing buckets
   list_t **buckets = safe_malloc(sizeof(list_t *) * N_BUCKETS);
-  for (int i = 0; i < N_BUCKETS; i++) buckets[i] = new_list();
+  for (size_t i = 0; i < N_BUCKETS; i++) buckets[i] = new_list();
 
   char *word;
 
@@ -52,12 +52,12 @@ static list_t *do_the_sorting(list_t **words_of_lenght, size_t longest) {
     }
 
     // merge the buckets
-    for (int i = 0; i < N_BUCKETS; i++) {
+    for (size_t i = 0; i < N_BUCKETS; i++) {
       res = list_concat(res, buckets[i], false);
     }
   }
 
-  for (int i = 0; i < N_BUCKETS; i++) {
+  for (size_t i = 0; i < N_BUCKETS; i++) {
     destroy_list(buckets[i]);
   }
 

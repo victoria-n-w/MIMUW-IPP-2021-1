@@ -36,7 +36,7 @@ line_set_t *new_line_set() {
 
 static void destroy_node(void *x) {
   tree_node_t *node = x;
-  u_int64_t *number;
+  uint64_t *number;
 
   while ((number = list_pop_front(node->line_numbers)) != NULL) {
     free(number);
@@ -56,7 +56,7 @@ void line_set_insert(line_set_t *set, line_record_t *rec) {
   tree_node_t *new_node = new_tree_node(rec);
 
   tree_node_t *res_node = splay_tree_insert(set->tree, new_node);
-  u_int64_t *new_line_number = safe_malloc(sizeof(u_int64_t));
+  uint64_t *new_line_number = safe_malloc(sizeof(uint64_t));
   *new_line_number = line_rec_get_number(rec);
 
   if (!list_is_empty(res_node->line_numbers)) {
@@ -70,8 +70,8 @@ void line_set_insert(line_set_t *set, line_record_t *rec) {
 }
 
 static bool number_list_comparator(void *a, void *b) {
-  return *(u_int64_t *)list_peek((list_t *)a) <
-         *(u_int64_t *)list_peek((list_t *)b);
+  return *(uint64_t *)list_peek((list_t *)a) <
+         *(uint64_t *)list_peek((list_t *)b);
 }
 
 static void *mapping_func(void *element) {
@@ -86,11 +86,11 @@ void line_set_to_stdout(line_set_t *set) {
 
   size_t n = dynamic_array_get_size(sorted);
 
-  u_int64_t *number;
+  uint64_t *number;
 
   for (size_t i = 0; i < n; i++) {
     while ((number = list_pop_front(dynamic_array_get(sorted, i))) != NULL) {
-      printf("%llu ", *number);
+      printf("%lu ", *number);
       free(number);
     }
     printf("\n");
