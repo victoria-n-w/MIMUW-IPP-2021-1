@@ -12,7 +12,7 @@ splay_tree_t *new_splay_tree(int (*cmp)(void *, void *));
 void destroy_splay_tree(splay_tree_t *t, void (*destroy_node)(void *));
 
 /**
- * inserts element into the tree
+ * inserts the element into the tree
  * returns pointer to this element
  */
 void *splay_tree_insert(splay_tree_t *tree, void *element);

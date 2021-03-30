@@ -1,12 +1,27 @@
 #!/bin/bash
 
+tmp_dir=$(mktemp -d -t ipp_testXXXXXX)
+
 for testcase in $2/*.in
 do
-    echo -n "TEST ${testcase%.in}: "
-    if diff "${testcase%in}out" <($1 < $testcase) > /dev/null
+    echo ""
+    echo "TEST ${testcase%.in}: "
+    cat $testcase | $1 1> $tmp_dir/test.out 2> $tmp_dir/test.err
+
+
+    if diff "${testcase%in}out" $tmp_dir/test.out > /dev/null
     then
-        echo "OK"
+        echo -n "out: OK      "
     else
-        echo "ERROR"
+        echo -n "out: ERROR   "
+    fi
+
+    if diff "${testcase%in}err" $tmp_dir/test.err > /dev/null
+    then 
+        echo " err: OK"
+    else
+        echo " err: ERROR"
     fi
 done
+
+rm -rf $tmp_dir

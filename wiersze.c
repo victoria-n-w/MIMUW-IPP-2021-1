@@ -11,20 +11,21 @@
 #include "parsers.h"
 
 bool is_whitespace(char x) {
-  if (x == 32 || x == 9 || x == 11 || x == 12 || x == 13) return true;
+  if (x == 32 || (9 <= x && x <= 13)) return true;
   return false;
 }
 
 bool valid_character(char x) {
   if (33 <= x && x <= 126) return true;
-  if (is_whitespace(x) || x == '\n') return true;
+  if (is_whitespace(x)) return true;
   return false;
 }
 
 bool valid_line(char *buffer) {
   size_t cnt = 0;
   while (buffer[cnt] != 0) {
-    if (!valid_character(buffer[cnt++])) return false;
+    if (!valid_character(buffer[cnt])) return false;
+    ++cnt;
   }
   return true;
 };
@@ -86,7 +87,6 @@ static void process_data(char *buffer, line_set_t *lines_data,
 
   line_rec_commit(rec);
 
-  // TODO this function has to free the rec memory
   if (line_rec_not_empty(rec)) {
     line_set_insert(lines_data, rec);
   } else {
