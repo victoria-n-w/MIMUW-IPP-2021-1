@@ -92,6 +92,7 @@ void line_set_to_stdout(line_set_t *set) {
     while (1) {
       number = list_pop_front(dynamic_array_get(sorted, i));
       printf("%lu", *number);
+      free(number);
       if (!list_is_empty(dynamic_array_get(sorted, i))) {
         printf(" ");
       } else {

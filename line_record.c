@@ -111,3 +111,8 @@ int line_rec_comparator(line_record_t* a, line_record_t* b) {
 
   return 0;
 }
+
+bool line_rec_not_empty(line_record_t* rec) {
+  return dynamic_array_get_size(rec->numbers) > 0 ||
+         dynamic_array_get_size(rec->words) > 0;
+}

@@ -16,7 +16,7 @@ bool is_whitespace(char x) {
 }
 
 bool valid_character(char x) {
-  if (33 <= x || x <= 126) return true;
+  if (33 <= x && x <= 126) return true;
   if (is_whitespace(x) || x == '\n') return true;
   return false;
 }
@@ -87,7 +87,11 @@ static void process_data(char *buffer, line_set_t *lines_data,
   line_rec_commit(rec);
 
   // TODO this function has to free the rec memory
-  line_set_insert(lines_data, rec);
+  if (line_rec_not_empty(rec)) {
+    line_set_insert(lines_data, rec);
+  } else {
+    destroy_line_record(rec);
+  }
 }
 
 int main() {

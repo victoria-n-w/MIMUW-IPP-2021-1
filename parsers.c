@@ -3,8 +3,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-// TODO delete
-#include <stdio.h>
+// TODO CHANGE BASE 0
 
 static long double parse_long_double(const char *word, bool *not_number) {
   char *endptr;
@@ -46,7 +45,9 @@ static long double parse_base(const char *word, bool *not_number, int base) {
   if (errno == 0 && *endptr == 0) {
     return res;
   }
-  *not_number = true;
+  errno = 0;
+
+  return parse_regular_number(word, not_number);
   return 0;
 }
 

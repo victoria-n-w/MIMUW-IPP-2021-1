@@ -45,4 +45,6 @@ int line_rec_comparator(line_record_t* a, line_record_t* b);
 
 uint64_t line_rec_get_number(line_record_t* rec);
 
+bool line_rec_not_empty(line_record_t* rec);
+
 #endif
