@@ -17,23 +17,24 @@ bool is_whitespace(char x) {
 
 bool valid_character(char x) {
   if (33 <= x && x <= 126) return true;
-  if (is_whitespace(x)) return true;
+  if (is_whitespace(x) || x == '\n') return true;
   return false;
 }
 
-bool valid_line(char *buffer) {
+bool valid_line(char *buffer, int n_characters) {
   size_t cnt = 0;
   while (buffer[cnt] != 0) {
     if (!valid_character(buffer[cnt])) return false;
     ++cnt;
   }
+  if (cnt != (size_t)n_characters) return false;
   return true;
 };
 
 // processes line
-static void process_data(char *buffer, line_set_t *lines_data,
+static void process_data(char *buffer, int n_characters, line_set_t *lines_data,
                          uint64_t line_cnt) {
-  if (!valid_line(buffer)) {
+  if (!valid_line(buffer, n_characters)) {
     fprintf(stderr, "ERROR %lu\n", line_cnt);
     return;
   }
@@ -102,8 +103,11 @@ int main() {
   buffer = malloc(sizeof(char) * BUFFER_SIZE);
   line_set_t *lines_data = new_line_set();
 
-  while (getline(&buffer, &BUFFER_SIZE, stdin) != -1) {
-    if (buffer[0] != '#') process_data(buffer, lines_data, line_counter);
+  int n_characters;
+
+  while ((n_characters = getline(&buffer, &BUFFER_SIZE, stdin)) != -1) {
+    if (buffer[0] != '#')
+      process_data(buffer, n_characters, lines_data, line_counter);
     line_counter += 1;
   }
 
