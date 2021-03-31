@@ -6,7 +6,9 @@ for testcase in $2/*.in
 do
     echo ""
     echo "TEST ${testcase%.in}: "
-    cat $testcase | $1 1> $tmp_dir/test.out 2> $tmp_dir/test.err
+    $1 <$testcase 1> $tmp_dir/test.out 2> $tmp_dir/test.err
+
+    echo -n "exit code: $?     "
 
 
     if diff "${testcase%in}out" $tmp_dir/test.out > /dev/null
@@ -18,10 +20,21 @@ do
 
     if diff "${testcase%in}err" $tmp_dir/test.err > /dev/null
     then 
-        echo " err: OK"
+        echo -n " err: OK"
     else
-        echo " err: ERROR"
+        echo -n " err: ERROR"
     fi
+
+    valgrind --error-exitcode=123 --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all $1 < $testcase > /dev/null 2>/dev/null
+    retVal=$?
+
+    if [[ "$retVal" -eq 123 ]];
+    then
+        echo "    memory: ERROR"
+    else
+        echo "    memory: OK"
+    fi
+
 done
 
 rm -rf $tmp_dir

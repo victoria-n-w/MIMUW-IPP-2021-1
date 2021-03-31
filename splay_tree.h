@@ -1,8 +1,6 @@
 #ifndef _SPLAY_TREE_H
 #define _SPLAY_TREE_H
 
-#include <stdbool.h>
-
 #include "dynamic_array.h"
 
 typedef struct splay_tree splay_tree_t;
